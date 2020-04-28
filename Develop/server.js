@@ -19,9 +19,58 @@ app.use(express.json());
 app.use(express.static("public", { "extensions": "html" }));
 
 // TODO: create mongodb connection with mongoose
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
+
+
+const Workout = mongoose.model("Workout", workoutSchema);
+
+module.exports = Workout;
+
 
 app.use(apiRoutes);
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
+
+// const workoutSchema = new mongoose.Schema({
+//   type:{
+//     type: String,
+//     trim: true,
+//     required: "string is required",
+//   },
+//   name: {
+//     type: String,
+//     trim: true,
+//     required: "string is required",
+//   },
+//   duration: {
+//     type: Number,
+//     required: true,
+//     unique: true,
+//     min: 1,
+//   },
+//   weight: {
+//     type: Number,
+//     required: true,
+//     unique: true,
+//     min: 1,
+//   },
+//   reps: {
+//     type: Number,
+//     required: true,
+//     unique: true,
+//     min: 1,
+//   },
+//   sets: {
+//     type: Number,
+//     required:true,
+//     unique: true,
+//     min:1,
+//   }
+
+// })

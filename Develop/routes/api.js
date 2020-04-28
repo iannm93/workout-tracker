@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 // TODO: import required model/s
 
+
 // TODO: and add code to the routes so that the app functions correctly
 
 router.post("/api/workouts", (req, res) => {});
