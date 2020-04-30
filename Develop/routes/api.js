@@ -8,11 +8,11 @@ const router = require("express").Router();
 router.post("/api/workouts", (req, res) => {
 
   // CODE HERE
-  const {body} = req;
-  db.Workout.create(body)
-  .then(({_id})=>{
-    db.Workout.updateOne({}, {$push: {} })
-  })
+  // const {body} = req;
+  // db.Workout.create(body)
+  // .then(({_id})=>{
+  //   db.Workout.updateAndFindOne({_id: mongojs.ObjectId(body.id)}, {$push: {type} })
+  // })
 });
 
 // Respond with workout for id url parameter. This should
