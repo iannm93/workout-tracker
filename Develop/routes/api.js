@@ -1,5 +1,7 @@
 const router = require("express").Router();
-// const db = require("../models/")
+const db = require("/..models");
+const mongoose = require("mongoose");
+
 // TODO: import required model/s
 
 // TODO: and add code to the routes so that the app functions correctly
@@ -8,11 +10,18 @@ const router = require("express").Router();
 router.post("/api/workouts", (req, res) => {
 
   // CODE HERE
-  // const {body} = req;
-  // db.Workout.create(body)
-  // .then(({_id})=>{
-  //   db.Workout.updateAndFindOne({_id: mongojs.ObjectId(body.id)}, {$push: {type} })
-  // })
+  const {body} = req;
+  console.log(req.body);
+  db.Workout.create(body)
+  .then(({_id})=>{
+    db.Workout.updateAndFindOne({_id: mongojs.ObjectId(body.id)}, {$push: {req: _id} })
+  })
+  .then((dbWorkout) =>{
+    res.json(dbWorkout)
+  })
+  .catch((err) =>{
+    res.json(err);
+  })
 });
 
 // Respond with workout for id url parameter. This should
@@ -30,6 +39,12 @@ router.get("/api/workouts", (req, res) => {
 // Respond with json array containing the last 7 workouts
 router.get("/api/workouts/range", (req, res) => {
   // CODE HERE
+  db.Workout.find({})
+  .populate("cardio")
+  .populate("resistance")
+  .then((dbWorkout)=>{
+    res.json(dbWorkout);
+  })
 });
 
 // Delete workout with id matching id in the request body.
